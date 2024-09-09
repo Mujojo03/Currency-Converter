@@ -3,43 +3,67 @@
   <head>
     <title>Currency Converter</title>
     <style>
-        body {
+body {
   font-family: Arial, sans-serif;
   max-width: 600px;
-  margin: 0 auto;
+  margin: 40px auto;
   padding: 20px;
+  background-color: #f9f9f9; /* light gray background */
+  border: 1px solid #ddd; /* subtle border */
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* slight shadow */
 }
 
 h1 {
   text-align: center;
   margin-bottom: 20px;
+  font-weight: bold;
+  color: #333; /* darker text color */
 }
 
 form {
   display: flex;
   flex-direction: column;
   gap: 10px;
-}
-
-label,
-input,
-select,
-button,
-output {
-  width: 100%;
+  padding: 20px;
+  background-color: #fff; /* white background */
+  border: 1px solid #ccc; /* subtle border */
+  border-radius: 10px; /* rounded corners */
 }
 
 label {
   text-align: left;
+  font-weight: bold;
+  color: #666; /* darker text color */
 }
 
-button {
+input[type="number"],
+select {
+  padding: 10px;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+button[type="button"] {
   align-self: center;
+  padding: 10px 20px;
+  font-size: 16px;
+  font-weight: bold;
+  color: #fff; /* white text color */
+  background-color: #337ab7; /* blue background */
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+button[type="button"]:hover {
+  background-color: #23527c; /* darker blue background on hover */
 }
 
 output {
   margin-top: 10px;
   font-weight: bold;
+  color: #666; /* darker text color */
 }
     </style>
   </head>
@@ -55,6 +79,7 @@ output {
         <option value="EUR">EUR - Euro</option>
         <option value="GBP">GBP - British Pound</option>
         <option value="INR">INR - Indian Rupee</option>
+        <option value="KES">KES - Kenyan Shilling</option>
       </select>
       <br />
       <label for="to">To:</label>
@@ -63,6 +88,7 @@ output {
         <option value="EUR">EUR - Euro</option>
         <option value="GBP">GBP - British Pound</option>
         <option value="INR">INR - Indian Rupee</option>
+        <option value="KES">KES - Kenyan Shilling</option>
       </select>
       <br />
       <button type="button" id="convert">Convert</button>
@@ -90,12 +116,13 @@ convertButton.addEventListener("click", () => {
 
   const conversionRates = {
     USD: 1,
-    EUR: 0.84,
+    EUR: 0.90,
     GBP: 0.72,
     INR: 74.88,
+    KES: 109.45,
   };
 
-  const conversionRate = conversionRates[from] / conversionRates[to];
+  const conversionRate = conversionRates[to] / conversionRates[from];
   const result = (amount * conversionRate).toFixed(2);
 
   resultOutput.value = `${amount} ${from} = ${result} ${to}`;
