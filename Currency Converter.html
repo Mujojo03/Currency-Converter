@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Currency Converter</title>
+    <style>
+        body {
+  font-family: Arial, sans-serif;
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+h1 {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+label,
+input,
+select,
+button,
+output {
+  width: 100%;
+}
+
+label {
+  text-align: left;
+}
+
+button {
+  align-self: center;
+}
+
+output {
+  margin-top: 10px;
+  font-weight: bold;
+}
+    </style>
+  </head>
+  <body>
+    <h1>Currency Converter</h1>
+    <form>
+      <label for="amount">Amount:</label>
+      <input type="number" id="amount" name="amount" min="0" step="0.01" required />
+      <br />
+      <label for="from">From:</label>
+      <select id="from" name="from">
+        <option value="USD">USD - US Dollar</option>
+        <option value="EUR">EUR - Euro</option>
+        <option value="GBP">GBP - British Pound</option>
+        <option value="INR">INR - Indian Rupee</option>
+      </select>
+      <br />
+      <label for="to">To:</label>
+      <select id="to" name="to">
+        <option value="USD">USD - US Dollar</option>
+        <option value="EUR">EUR - Euro</option>
+        <option value="GBP">GBP - British Pound</option>
+        <option value="INR">INR - Indian Rupee</option>
+      </select>
+      <br />
+      <button type="button" id="convert">Convert</button>
+      <br />
+      <label for="result">Result:</label>
+      <output id="result" name="result"></output>
+    </form>
+    <script>
+        const convertButton = document.getElementById("convert");
+const resultOutput = document.getElementById("result");
+
+convertButton.addEventListener("click", () => {
+  const amountInput = document.getElementById("amount");
+  const fromSelect = document.getElementById("from");
+  const toSelect = document.getElementById("to");
+
+  const amount = parseFloat(amountInput.value);
+  const from = fromSelect.value;
+  const to = toSelect.value;
+
+  if (isNaN(amount) || amount <= 0) {
+    resultOutput.value = "Please enter a valid amount.";
+    return;
+  }
+
+  const conversionRates = {
+    USD: 1,
+    EUR: 0.84,
+    GBP: 0.72,
+    INR: 74.88,
+  };
+
+  const conversionRate = conversionRates[from] / conversionRates[to];
+  const result = (amount * conversionRate).toFixed(2);
+
+  resultOutput.value = `${amount} ${from} = ${result} ${to}`;
+});
+    </script>
+  </body>
+</html>
